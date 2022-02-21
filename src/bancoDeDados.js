@@ -5,18 +5,26 @@ const sequence = {
 
 const produtos = {}
 
-function salvarProduto(produto){
-   !produto.id ? produto.id = sequence.id : produtos[produto.id] = produto
-
-   return produto
+export function salvarProduto(produto){
+   if(!produto.id) {
+      produto.id = sequence.id
+   }
+   
+   produtos[produto.id] = produto
+   
+   return produtos
 }
 
-function getProduto(id){
+export function getProduto(id){
    return produtos[id] || {}
 }
 
-function getProdutos(){
+export function getProdutos(){
    return Object.values(produtos)
 }
 
-module.exports = { salvarProduto, getProduto, getProdutos }
+export function excluirProduto(id){
+   const produto = produtos[id]
+   delete produtos[id]
+   return produto
+}
